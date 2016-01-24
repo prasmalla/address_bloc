@@ -117,4 +117,13 @@ RSpec.describe AddressBook do
       check_entry(entry, "prasmalla5", "646.646.6462", "pras5@malla.com")
     end
   end
+
+  context "#nuke" do
+    it "should delete all entries" do
+      book.import_from_csv("entries.csv")
+      expect(book.entries.size).to eq 5
+      book.nuke
+      expect(book.entries.size).to eq 0
+    end
+  end
 end
