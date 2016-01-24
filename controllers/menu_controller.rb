@@ -9,6 +9,7 @@ class MenuController
 
   def main_menu
     puts "main menu - #{@address_book.entries.count} entries"
+    puts "0 - delete all"
     puts "1 - view all"
     puts "2 - add entry"
     puts "3 - find entry"
@@ -19,6 +20,12 @@ class MenuController
     selection = gets.to_i
     
     case selection
+    when 0
+      system "clear"
+      @address_book.nuke
+      print "wiped clean! press any key to start over"
+      gets.chomp
+      main_menu
     when 1
       system "clear"
       view_all_entries
