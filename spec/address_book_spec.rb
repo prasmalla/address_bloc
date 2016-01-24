@@ -117,4 +117,26 @@ RSpec.describe AddressBook do
       check_entry(entry, "prasmalla5", "646.646.6462", "pras5@malla.com")
     end
   end
+
+  context "#iterative_search" do
+    it "searches AddrressBook for a non-existent entry" do
+      book.import_from_csv("entries.csv")
+      entry = book.iterative_search("malla")
+      expect(entry).to be_nil
+    end
+
+    it "searches AddrressBook for entry 1" do
+      book.import_from_csv("entries.csv")
+      entry = book.iterative_search("prasmalla1")
+      expect(entry).to be_a Entry
+      check_entry(entry, "prasmalla1", "646.646.6466", "pras1@malla.com")
+    end
+
+    it "searches AddrressBook for entry 2" do
+      book.import_from_csv("entries.csv")
+      entry = book.iterative_search("prasmalla2")
+      expect(entry).to be_a Entry
+      check_entry(entry, "prasmalla2", "646.646.6465", "pras2@malla.com")
+    end
+  end
 end
