@@ -36,5 +36,20 @@ RSpec.describe AddressBook do
       expect(new_entry.phone_number).to eq '646.646.6466'
       expect(new_entry.email).to eq 'pras@malla.com'
     end
+   end
+
+  context "#remove_entry" do
+    before do
+      @book = AddressBook.new
+      @book.add_entry('pras malla', '646.646.6466', 'pras@malla.com')
+    end
+    
+    it "removes a single entry" do
+      @book.add_entry('remove malla', '646.646.6466', 'pras@malla.com')
+      expect(@book.entries.size).to eq 2
+      @book.remove_entry('remove malla', '646.646.6466', 'pras@malla.com')
+      expect(@book.entries.size).to eq 1
+      expect(@book.entries.first.name).to eq('pras malla')
+    end
   end
 end
